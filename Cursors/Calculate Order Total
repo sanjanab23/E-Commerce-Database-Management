@@ -1,1 +1,18 @@
+DECLARE cur_orders CURSOR FOR
+SELECT order_id
+FROM Orders;
+
+OPEN cur_orders;
+FETCH NEXT FROM cur_orders INTO @order_id;
+WHILE @@FETCH_STATUS = 0
+BEGIN
+    -- Calculate order total
+    SELECT SUM(quantity * unit_price) AS total_amount
+    FROM Order_Details
+    WHERE order_id = @order_id;
+    
+    FETCH NEXT FROM cur_orders INTO @order_id;
+END;
+CLOSE cur_orders;
+DEALLOCATE cur_orders;
 
