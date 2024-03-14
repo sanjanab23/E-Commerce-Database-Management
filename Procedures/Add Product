@@ -1,1 +1,17 @@
+DELIMITER //
+
+CREATE PROCEDURE Add_Product (
+    IN product_name VARCHAR(255),
+    IN category VARCHAR(100),
+    IN price DECIMAL(10, 2),
+    IN stock_quantity INT
+)
+BEGIN
+    INSERT INTO Products (product_name, category, price, stock_quantity)
+    VALUES (product_name, category, price, stock_quantity);
+END //
+
+DELIMITER ;
+
+
 
